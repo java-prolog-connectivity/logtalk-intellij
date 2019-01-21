@@ -4,6 +4,8 @@ package org.logtalk.intellij.editor;
 import static org.logtalk.intellij.ast.decorator.CommentDecorator.isComment;
 import static org.logtalk.intellij.psi.decorator.ListDecorator.isList;
 import static org.logtalk.intellij.psi.decorator.ListDecorator.listDecorator;
+import static org.logtalk.intellij.psi.decorator.OperationDecorator.isOperation;
+import static org.logtalk.intellij.psi.decorator.OperationDecorator.operationDecorator;
 import static org.logtalk.intellij.psi.decorator.SentenceDecorator.isSentence;
 
 import java.util.ArrayList;
@@ -19,6 +21,8 @@ import com.intellij.lang.folding.FoldingDescriptor;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
+import org.logtalk.intellij.psi.decorator.OperationDecorator;
+import org.logtalk.parser.operator.Operator;
 
 public class LogtalkFoldingBuilder implements FoldingBuilder {
 
@@ -68,17 +72,21 @@ public class LogtalkFoldingBuilder implements FoldingBuilder {
             return "/*...*/";
         } else if (isList(psi)) {
             return "[...]";
-        } /*else if (isSentence(psi)) {
-            if (isOperation(psi.getFirstChild())) {
-                OperationDecorator operation = operationDecorator(psi.getFirstChild());
+        } else if (isSentence(psi)) {
+            int indexRuleOperator = psi.getText().indexOf(Operator.RULE_OPERATOR);
+            if (indexRuleOperator != -1) {
+                return collapseWhiteSpace(psi.getText().substring(0, indexRuleOperator + Operator.RULE_OPERATOR.length()));
+            }
+            /*if (isOperation(psi.getFirstChild().getFirstChild())) {
+                OperationDecorator operation = operationDecorator(psi.getFirstChild().getFirstChild());
                 if (operation.isRule() || operation.isGrammarRule()) {
-                    *//*String head = operation.getFirstChild().getFirstChild().getText();
-                    return head + " " + operation.getOperatorSymbol() + " ...";*//*
+                    String head = operation.getFirstChild().getFirstChild().getText();
+                    return head + " " + operation.getOperatorSymbol() + " ...";
                 } else if (operation.isDirective()) {
                     //return operation.getFirstChild().getChildren()[1].getFirstChild().getText() + ".";
                 }
-            }
-        }*/
+            }*/
+        }
         //return "...";
         return collapseWhiteSpace(psi.getText());
     }
