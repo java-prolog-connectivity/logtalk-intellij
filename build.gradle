@@ -1,0 +1,67 @@
+/*
+This build is configured according to the following instructions:
+- https://github.com/JetBrains/gradle-intellij-plugin/blob/master/README.md
+- http://www.jetbrains.org/intellij/sdk/docs/tutorials/build_system.html
+- https://github.com/JetBrains/gradle-intellij-plugin
+- https://docs.gradle.org/current/userguide/idea_plugin.html
+*/
+
+
+plugins {
+    id "org.jetbrains.intellij" version "0.4.1"
+}
+
+repositories {
+    mavenCentral()
+    maven {url 'https://jitpack.io'}
+}
+
+apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: 'groovy'
+
+
+intellij {
+    pluginName 'Logtalk'
+    version '2018.3' //IntelliJ dependency; for a full list of IntelliJ IDEA releases please see https://www.jetbrains.com/intellij-repository/releases
+    //type = 'IC'
+}
+
+
+group 'org.jetbrains'
+version '1.0.12' // Plugin version
+
+
+allprojects {
+    sourceSets {
+        main {
+            java.srcDirs 'src/main/java', 'gen'
+            resources.srcDirs 'src/main/resources'
+        }
+        test {
+            groovy.srcDirs 'src/test/groovy'
+        }
+    }
+}
+
+
+dependencies {
+
+    //compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.12'
+    compile group: 'com.google.guava', name: 'guava', version: '22.0'
+
+    //if this is not set to testCompile the verifyPlugin task will fail since more than one plugin descriptor are in the classpath
+    testCompile 'com.github.JetBrains:Grammar-Kit:2017.1.7'
+
+    testCompile(group: 'org.spockframework', name: 'spock-core', version: '1.1-groovy-2.4') {
+        exclude group: 'org.codehaus.groovy', module: 'groovy-all'
+    }
+
+}
+
+configurations.all {
+    //resolutionStrategy.force 'org.codehaus.groovy:groovy-all:2.4.12'
+    resolutionStrategy {
+        force 'org.codehaus.groovy:groovy-all:2.4.12'
+    }
+}

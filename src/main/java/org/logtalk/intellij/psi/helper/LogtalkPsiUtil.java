@@ -1,0 +1,45 @@
+package org.logtalk.intellij.psi.helper;
+
+
+
+
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.tree.IElementType;
+import org.logtalk.intellij.psi.Constants;
+import org.logtalk.intellij.psi.LogtalkTypes;
+
+public class LogtalkPsiUtil {
+
+    public static IElementType getElementType(PsiElement element) {
+        return element.getNode().getElementType();
+    }
+
+    public static boolean hasParentWithType(PsiElement element, IElementType elementType) {
+        return element.getParent() != null && getElementType(element.getParent()).equals(elementType);
+    }
+
+
+
+    public static boolean isOperator(PsiElement element) {
+        //return ProjectSettings.getOperators().contains(element.getText())
+        return false;
+        //return isKnownBinaryOperator(element) || isKnownLeftOperator(element);
+    }
+
+/*    public static boolean isKnownBinaryOperator(PsiElement element) {
+        return getElementType(element).equals(KNOWN_BINARY_OPERATOR);
+    }
+
+    public static boolean isKnownLeftOperator(PsiElement element) {
+        return getElementType(element).equals(KNOWN_LEFT_OPERATOR);
+    }*/
+
+    public static boolean isAtomKeyword(PsiElement element) {
+        return getElementType(element).equals(LogtalkTypes.ATOM) && Constants.ATOM_KEYWORDS.contains(element.getText());
+    }
+
+    public static boolean isCompoundNameKeyword(PsiElement element) {
+        return getElementType(element).equals(LogtalkTypes.COMPOUND_NAME) && Constants.COMPOUND_NAME_KEYWORDS.contains(element.getText());
+    }
+
+}
