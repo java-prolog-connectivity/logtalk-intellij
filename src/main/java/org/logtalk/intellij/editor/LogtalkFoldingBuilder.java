@@ -73,9 +73,15 @@ public class LogtalkFoldingBuilder implements FoldingBuilder {
         } else if (isList(psi)) {
             return "[...]";
         } else if (isSentence(psi)) {
-            int indexRuleOperator = psi.getText().indexOf(Operator.RULE_OPERATOR);
-            if (indexRuleOperator != -1) {
-                return collapseWhiteSpace(psi.getText().substring(0, indexRuleOperator + Operator.RULE_OPERATOR.length()));
+            String text = psi.getText().trim();
+            int indexRuleOperator = text.indexOf(Operator.RULE_OPERATOR);
+            if (indexRuleOperator > 0) {
+                return collapseWhiteSpace(text.substring(0, indexRuleOperator + Operator.RULE_OPERATOR.length()));
+            } else {
+                int firstNewLineIndex = text.indexOf("\n");
+                if (firstNewLineIndex > 0) {
+                    return text.substring(0, firstNewLineIndex);
+                }
             }
             /*if (isOperation(psi.getFirstChild().getFirstChild())) {
                 OperationDecorator operation = operationDecorator(psi.getFirstChild().getFirstChild());
