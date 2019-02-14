@@ -38,7 +38,7 @@ public class Constants {
             "extends_object" , "extends_protocol" , "extends_category" ,
             "implements_protocol" , "imports_category" , "instantiates_class" ,
             "specializes_class" , "complements_object" , "abolish_events" , "current_event" , "define_events" ,
-            "threaded" , "threaded_call" , "threaded_once" , "threaded_ignore" , "threaded_exit" ,
+            "threaded" , "threaded_call" , "threaded_once" , "threaded_ignore" , "threaded_exit" , "threaded_cancel" ,
             "threaded_peek" , "threaded_wait" , "threaded_notify" , "threaded_engine" , "threaded_engine_create" , "threaded_engine_destroy" ,
             "threaded_engine_self" , "threaded_engine_next" , "threaded_engine_next_reified" , "threaded_engine_yield" , "threaded_engine_post" ,
             "threaded_engine_fetch" , "logtalk_compile" , "logtalk_load" , "logtalk_make" , "logtalk_make_target_action" , "logtalk_library_path" ,
