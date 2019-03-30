@@ -2,7 +2,7 @@
   <id>org.logtalk</id>
   <name>Logtalk</name>
 
-  <vendor email="sergioc78@gmail.com" url="https://logtalk.org/">Logtalk</vendor>
+  <vendor email="sergioc78@gmail.com" url="https://github.com/java-prolog-connectivity/logtalk-intellij">Sergio Castro</vendor>
 
   <description><![CDATA[
       <em>Logtalk</em> support for IntelliJ.
@@ -17,11 +17,7 @@
 
 
   <change-notes><![CDATA[
-      Improving folding of clauses. Now a clause:
-        foo(var) :- write(hello).
-      becomes:
-        foo(var) :-
-      when folded.
+      Fixed compatibility issue with IntelliJ 2019.
     ]]>
   </change-notes>
 

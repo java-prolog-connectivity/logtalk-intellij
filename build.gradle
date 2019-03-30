@@ -8,7 +8,7 @@ This build is configured according to the following instructions:
 
 
 plugins {
-    id "org.jetbrains.intellij" version "0.4.1"
+    id "org.jetbrains.intellij" version "0.4.7"
 }
 
 repositories {
@@ -23,13 +23,19 @@ apply plugin: 'groovy'
 
 intellij {
     pluginName 'Logtalk'
-    version '2018.3' //IntelliJ dependency; for a full list of IntelliJ IDEA releases please see https://www.jetbrains.com/intellij-repository/releases
+    //IntelliJ dependency; for a full list of IntelliJ IDEA releases see https://www.jetbrains.com/intellij-repository/releases
+    version '2018.3'
     //type = 'IC'
 }
 
+// see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html
+patchPluginXml {
+    //sinceBuild '183.*'
+    untilBuild '' //so it will not have an upper-bound version.
+}
 
 group 'org.jetbrains'
-version '1.0.13' // Plugin version
+version '1.0.14' // Plugin version
 
 
 allprojects {
