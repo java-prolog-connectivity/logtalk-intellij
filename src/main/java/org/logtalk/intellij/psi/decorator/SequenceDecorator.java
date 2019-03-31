@@ -2,6 +2,8 @@ package org.logtalk.intellij.psi.decorator;
 
 
 import static org.logtalk.intellij.psi.decorator.OperationDecorator.isOperation;
+import static org.logtalk.intellij.psi.decorator.OperationDecorator.operationDecorator;
+import static org.logtalk.parser.operator.Operator.SEQUENCE_SEPARATOR;
 
 import java.util.Iterator;
 
@@ -12,9 +14,13 @@ import com.intellij.psi.PsiElement;
 public class SequenceDecorator extends PsiElementDecorator {
 
     public static boolean isSequence(PsiElement psiElement) {
-        return isOperation(psiElement) /*&&
-                operationDecorator(psiElement).getOperatorSymbol().equals(SEQUENCE_SEPARATOR) &&
-                psiElement.getChildren().length <= 2*/;
+        if (!isOperation(psiElement)) {
+            return false;
+        } else {
+            OperationDecorator operationDecorator = operationDecorator(psiElement);
+            OperationDecorator.OperationPart operationPart = operationDecorator.iterator().next().next().get();
+            return operationPart.getElement().getText().equals(SEQUENCE_SEPARATOR);
+        }
     }
 
     private SequenceDecorator(PsiElement psiElement) {
@@ -42,7 +48,7 @@ public class SequenceDecorator extends PsiElementDecorator {
     }
 
     private static PsiElement getSecondSequenceChild(PsiElement psiElement) {
-        return psiElement.getFirstChild().getLastChild();
+        return psiElement.getLastChild().getFirstChild().getLastChild();
     }
 
     private static class SequenceMembersIterator extends AbstractIterator<PsiElement> {
@@ -52,20 +58,19 @@ public class SequenceDecorator extends PsiElementDecorator {
             this.sequence = sequence;
         }
 
-
-
         @Override
         public PsiElement computeNext() {
-            /*PsiElement firstSequenceChild = getFirstSequenceChild(sequence);
-            members.add(firstSequenceChild);
-            PsiElement secondSequenceChild = getSecondSequenceChild(sequence);
-            if (isSequence(secondSequenceChild.getFirstChild())) {
-                sequence = secondSequenceChild.getFirstChild();
-            } else {
+            if (sequence == null) {
+                return endOfData();
+            } else if (!isSequence(sequence)) {
+                PsiElement last = sequence;
                 sequence = null;
-                members.add(secondSequenceChild);
-            }*/
-            return null;
+                return last;
+            } else {
+                PsiElement next = getFirstSequenceChild(sequence);
+                sequence = getSecondSequenceChild(sequence);
+                return next;
+            }
         }
     }
 }

@@ -11,10 +11,6 @@ public class AtomDecorator extends PsiElementDecorator {
         return psiElement instanceof LogtalkAtom;
     }
 
-    private AtomDecorator(PsiElement psiElement) {
-        super(psiElement);
-    }
-
     public static AtomDecorator atomDecorator(PsiElement psiElement) {
         if (!isAtom(psiElement)) {
             throw new WrongPsiElementException(psiElement, LogtalkAtom.class);
@@ -34,6 +30,10 @@ public class AtomDecorator extends PsiElementDecorator {
 
     private static AtomDecorator fromBasicTerm(PsiElement psiElement) {
         return atomDecorator(psiElement.getFirstChild());
+    }
+
+    private AtomDecorator(PsiElement psiElement) {
+        super(psiElement);
     }
 
     public String getAtomText() {

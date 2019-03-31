@@ -50,7 +50,7 @@ class OperatorParserSpec extends Specification {
     }
 
     //A is 2 -1
-    def "parse binary operator that is also defined as unary"() {
+    def "parse binary operator also defined as unary"() {
         setup:
         PsiElement operationNode = parseOperation("2 - 1")
 
@@ -64,9 +64,9 @@ class OperatorParserSpec extends Specification {
         root.rightArgument.get().getText() == "1"
     }
 
-    def "parse binary operator that is also defined as unary and no spaces present"() {
+    def "parse binary operator also defined as unary and no spaces present"() {
         setup:
-        PsiElement operationNode = parseOperation("2 -1")
+        PsiElement operationNode = parseOperation("2-1")
 
         when:
         OperationView operationView = getExtendedPsiView(operationNode.getFirstChild()).get().operationView()

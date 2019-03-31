@@ -30,7 +30,9 @@ RBRACKET = "]"
 LBRACE = "{"
 RBRACE = "}"
 
+COMMA = ","
 CUT = "!"
+PIPE = "|"
 DOT = "."
 
 //specific to SWI
@@ -79,16 +81,18 @@ NON_PRINTABLE = ({CRLF}|{WHITE_SPACE})+
 NON_CODE = ({NON_PRINTABLE}|{ANY_BLOCK_COMMENT})+
 
 
-COMBINABLE_OPERATOR_SYMBOLS = "<" | ">" | "?" | "/" | ";" | ":" | "\\" | "|" | "=" | "+" | "-" | "*" | "&" | "^" | "$" | "#" | "@" | "~"
+COMBINABLE_OPERATOR_SYMBOLS = "<" | ">" | "?" | "/" | ";" | ":" | "\\" | "=" | "+" | "-" | "*" | "&" | "^" | "$" | "#" | "@" | "~"
 
-COMMA = ","
-NON_COMBINABLE_OPERATOR_SYMBOLS = {COMMA} | {CUT}
+NON_COMBINABLE_OPERATOR_SYMBOLS = {COMMA} | {CUT} | {PIPE}
 
 OPERATOR_SYMBOLS = {NON_COMBINABLE_OPERATOR_SYMBOLS} | {COMBINABLE_OPERATOR_SYMBOLS}+ | ({COMBINABLE_OPERATOR_SYMBOLS} | {DOT}){2,5} //should be 2 or more, but I do not know yet how to write that
 
 //parenthesized operator symbols
 PAR_OPERATOR_SYMBOLS = {NON_COMBINABLE_OPERATOR_SYMBOLS} | ({COMBINABLE_OPERATOR_SYMBOLS} | {DOT})+
 
+SYMBOLIC_COMPOUND_NAME = ({COMBINABLE_OPERATOR_SYMBOLS} | {DOT})+
+
+UNQUOTED_COMPOUND_NAME = {UNQUOTED_ATOM} | {SYMBOLIC_COMPOUND_NAME}
 
 %state SENTENCE, PARENTHESIZED_SYMBOLS, SINGLE_QUOTE_STRING, DOUBLE_QUOTE_STRING, CHAR_CODE
 
@@ -138,7 +142,7 @@ PAR_OPERATOR_SYMBOLS = {NON_COMBINABLE_OPERATOR_SYMBOLS} | ({COMBINABLE_OPERATOR
 
     {DOUBLE_QUOTE}                                  { yybegin(DOUBLE_QUOTE_STRING);}
 
-    {UNQUOTED_ATOM}/{LPAREN}                        { yybegin(SENTENCE); return LogtalkTypes.UNQUOTED_COMPOUND_NAME; }
+    {UNQUOTED_COMPOUND_NAME}/{LPAREN}               { yybegin(SENTENCE); return LogtalkTypes.UNQUOTED_COMPOUND_NAME; }
 
     {LPAREN} {NON_CODE}* {PAR_OPERATOR_SYMBOLS} {NON_CODE}* {RPAREN}
                                                     { yybegin(PARENTHESIZED_SYMBOLS); yypushback(yylength() - 1); return LogtalkTypes.LPAREN; }

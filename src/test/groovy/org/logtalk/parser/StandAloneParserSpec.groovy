@@ -16,12 +16,4 @@ class StandAloneParserSpec extends Specification {
         sentence.getNode().getElementType().equals(LogtalkTypes.SENTENCE)
     }
 
-    def "parse atom"() {
-        when:
-        AtomDecorator unquotedStom = atomDecorator(StandAloneParser.parseAtom("x"))
-        AtomDecorator quotedAtom = atomDecorator(StandAloneParser.parseAtom("'x'"))
-        then:
-        !unquotedStom.isQuoted()
-        quotedAtom.isQuoted()
-    }
 }
