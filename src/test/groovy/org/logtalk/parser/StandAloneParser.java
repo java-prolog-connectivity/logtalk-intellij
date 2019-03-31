@@ -40,7 +40,7 @@ public class StandAloneParser {
         return parseBasicTerm(atom).getFirstChild();
     }
 
-    public static PsiElement parseBasicTerm(String basicTerm) {
+    private static PsiElement parseBasicTerm(String basicTerm) {
         return parseTerm(basicTerm).getFirstChild();
     }
 

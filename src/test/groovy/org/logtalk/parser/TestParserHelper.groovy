@@ -8,7 +8,13 @@ import static org.logtalk.intellij.psi.decorator.OperationDecorator.operationDec
 
 class TestParserHelper {
 
-    static void init(PsiElement operationNode) {
+    static PsiElement parseOperation(String text) {
+        PsiElement operationTerm = StandAloneParser.parseTerm(text).getFirstChild()
+        initOperationNode(operationTerm)
+        return operationTerm
+    }
+
+    private static void initOperationNode(PsiElement operationNode) {
         SentenceCorrectness correctness = new SentenceCorrectness()
         for (OperationDecorator.OperationPart part : (Iterable<OperationDecorator.OperationPart>) { -> operationDecorator(operationNode).iterator()}) {
             part.operationView().setSentenceCorrectness(correctness)

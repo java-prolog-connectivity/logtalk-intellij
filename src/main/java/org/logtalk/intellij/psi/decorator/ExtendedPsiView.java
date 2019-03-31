@@ -1,11 +1,10 @@
 package org.logtalk.intellij.psi.decorator;
 
-import java.util.Optional;
-
 import com.intellij.openapi.util.Key;
 import com.intellij.psi.PsiElement;
 import org.logtalk.intellij.psi.helper.SentenceCorrectness;
-import org.logtalk.parser.operator.OperatorType;
+
+import java.util.Optional;
 
 public class ExtendedPsiView extends PsiElementDecorator {
 

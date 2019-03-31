@@ -22,7 +22,7 @@ public class OperationView extends PsiElementDecorator {
     private Optional<OperationView> leftArgumentOpt = Optional.empty();
     private Optional<OperationView> rightArgumentOpt = Optional.empty();
 
-    public OperationView(final PsiElement psiElement, SentenceCorrectness sentenceCorrectness) {
+    public OperationView(PsiElement psiElement, SentenceCorrectness sentenceCorrectness) {
         super(psiElement);
         this.sentenceCorrectness = sentenceCorrectness;
         try {
@@ -40,7 +40,7 @@ public class OperationView extends PsiElementDecorator {
         return syntaxError;
     }
 
-    public void setSyntaxError(final boolean syntaxError) {
+    public void setSyntaxError(boolean syntaxError) {
         this.syntaxError = syntaxError;
         if (syntaxError) {
             sentenceCorrectness.flagError();

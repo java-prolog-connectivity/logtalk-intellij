@@ -2,19 +2,15 @@ package org.logtalk.parser
 
 import com.intellij.psi.PsiElement
 import org.logtalk.intellij.psi.decorator.OperationView
-import org.logtalk.parser.StandAloneParser
 import spock.lang.Specification
 
 import static org.logtalk.intellij.psi.decorator.ExtendedPsiView.getExtendedPsiView
-import static org.logtalk.parser.TestParserHelper.init
 
 class ExtendedViewSpec extends Specification {
 
     def "operation view"() {
         setup:
-        PsiElement termNode = StandAloneParser.parseTerm("a,b,c")
-        PsiElement operationNode = termNode.getFirstChild()
-        init(operationNode)
+        PsiElement operationNode = TestParserHelper.parseOperation("a,b,c")
 
         when:
         OperationView operationView = getExtendedPsiView(operationNode.getFirstChild()).get().operationView()
@@ -46,9 +42,7 @@ class ExtendedViewSpec extends Specification {
 
     def "operation view with spaces"() {
         setup:
-        PsiElement termNode = StandAloneParser.parseTerm("a , b")
-        PsiElement operationNode = termNode.getFirstChild()
-        init(operationNode)
+        PsiElement operationNode = TestParserHelper.parseOperation("a , b")
 
         when:
         OperationView operationView = getExtendedPsiView(operationNode.getFirstChild()).get().operationView()
@@ -60,9 +54,7 @@ class ExtendedViewSpec extends Specification {
 
     def "syntax error"() {
         setup:
-        PsiElement termNode = StandAloneParser.parseTerm("a,")
-        PsiElement operationNode = termNode.getFirstChild()
-        init(operationNode)
+        PsiElement operationNode = TestParserHelper.parseOperation("a,")
 
         when:
         OperationView operationView = getExtendedPsiView(operationNode.getFirstChild()).get().operationView()
