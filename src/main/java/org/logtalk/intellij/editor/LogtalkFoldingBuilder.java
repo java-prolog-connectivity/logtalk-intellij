@@ -1,11 +1,9 @@
 package org.logtalk.intellij.editor;
 
 
-import static org.logtalk.intellij.ast.decorator.CommentDecorator.isComment;
+import static org.logtalk.intellij.editor.ASTNodeHelper.isComment;
 import static org.logtalk.intellij.psi.decorator.ListDecorator.isList;
 import static org.logtalk.intellij.psi.decorator.ListDecorator.listDecorator;
-import static org.logtalk.intellij.psi.decorator.OperationDecorator.isOperation;
-import static org.logtalk.intellij.psi.decorator.OperationDecorator.operationDecorator;
 import static org.logtalk.intellij.psi.decorator.SentenceDecorator.isSentence;
 
 import java.util.ArrayList;
@@ -21,7 +19,6 @@ import com.intellij.lang.folding.FoldingDescriptor;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
-import org.logtalk.intellij.psi.decorator.OperationDecorator;
 import org.logtalk.parser.operator.Operator;
 
 public class LogtalkFoldingBuilder implements FoldingBuilder {
