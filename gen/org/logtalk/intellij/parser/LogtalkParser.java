@@ -6,6 +6,7 @@ import com.intellij.lang.PsiBuilder.Marker;
 import static org.logtalk.intellij.psi.LogtalkTypes.*;
 import static com.intellij.lang.parser.GeneratedParserUtilBase.*;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.IFileElementType;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.lang.PsiParser;
@@ -23,50 +24,11 @@ public class LogtalkParser implements PsiParser, LightPsiParser {
     boolean r;
     b = adapt_builder_(t, b, this, null);
     Marker m = enter_section_(b, 0, _COLLAPSE_, null);
-    if (t == ATOM) {
-      r = atom(b, 0);
-    }
-    else if (t == BASIC_TERM) {
-      r = basic_term(b, 0);
-    }
-    else if (t == BRACED_BLOCK) {
-      r = braced_block(b, 0);
-    }
-    else if (t == COMPOUND) {
-      r = compound(b, 0);
-    }
-    else if (t == COMPOUND_NAME) {
-      r = compound_name(b, 0);
-    }
-    else if (t == LIST) {
-      r = list(b, 0);
-    }
-    else if (t == MAP_NAME) {
-      r = map_name(b, 0);
-    }
-    else if (t == MAP_TERM) {
-      r = map_term(b, 0);
-    }
-    else if (t == NUMBER) {
-      r = number(b, 0);
-    }
-    else if (t == OPERATION) {
-      r = operation(b, 0);
-    }
-    else if (t == PARENTHESIZED_BLOCK) {
-      r = parenthesized_block(b, 0);
-    }
-    else if (t == SENTENCE) {
-      r = sentence(b, 0);
-    }
-    else if (t == TERM) {
-      r = term(b, 0);
-    }
-    else if (t == VARIABLE) {
-      r = variable(b, 0);
+    if (t instanceof IFileElementType) {
+      r = parse_root_(t, b, 0);
     }
     else {
-      r = parse_root_(t, b, 0);
+      r = false;
     }
     exit_section_(b, 0, m, t, r, true, TRUE_CONDITION);
   }
