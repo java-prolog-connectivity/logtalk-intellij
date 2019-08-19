@@ -2,7 +2,6 @@ package org.logtalk.intellij.editor;
 
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
-import static org.logtalk.intellij.psi.LogtalkElementType.isParenthesis;
 
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
@@ -17,6 +16,10 @@ import org.logtalk.intellij.psi.LogtalkTypes;
 import org.logtalk.intellij.psi.decorator.ExtendedPsiView;
 
 public class LogtalkSyntaxHighlighter extends SyntaxHighlighterBase {
+
+    private static boolean isParenthesis(IElementType tokenType) {
+        return tokenType.equals(LogtalkTypes.LPAREN) || tokenType.equals(LogtalkTypes.RPAREN);
+    }
 
     public static final TextAttributesKey OPERATOR =
             createTextAttributesKey("OPERATOR", DefaultLanguageHighlighterColors.CONSTANT);

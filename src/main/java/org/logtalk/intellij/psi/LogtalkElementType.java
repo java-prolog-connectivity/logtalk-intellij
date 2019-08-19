@@ -13,8 +13,4 @@ public class LogtalkElementType extends IElementType {
         super(debugName, LogtalkLanguage.INSTANCE);
     }
 
-    public static boolean isParenthesis(IElementType tokenType) {
-        return tokenType.equals(LogtalkTypes.LPAREN) || tokenType.equals(LogtalkTypes.RPAREN);
-    }
-
 }
