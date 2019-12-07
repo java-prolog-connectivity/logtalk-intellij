@@ -58,7 +58,7 @@ compound_name ::= (UNQUOTED_COMPOUND_NAME | QUOTED_COMPOUND_NAME)
 
 list ::= LBRACKET term? RBRACKET
 
-braced_block ::= LBRACE term RBRACE
+braced_block ::= LBRACE term? RBRACE
 
 parenthesized_block ::= LPAREN term RPAREN
 
