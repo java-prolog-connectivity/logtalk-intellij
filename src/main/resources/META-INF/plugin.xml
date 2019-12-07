@@ -17,7 +17,8 @@
 
 
   <change-notes><![CDATA[
-      Fixed compatibility issue with IntelliJ 2019.
+      Fixed parsing errors concerning hex numbers and empty braced blocks.
+      Upgrading libraries for IntelliJ 2019.3.
     ]]>
   </change-notes>
 

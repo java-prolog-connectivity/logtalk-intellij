@@ -7,7 +7,7 @@ This build is configured according to the following instructions:
 */
 
 plugins {
-    id "org.jetbrains.intellij" version "0.4.10"
+    id "org.jetbrains.intellij" version "0.4.14"
     id "idea"
     id "java"
     id "groovy"
@@ -22,7 +22,7 @@ repositories {
 intellij {
     pluginName 'Logtalk'
     //IntelliJ dependency; for a full list of IntelliJ IDEA releases see https://www.jetbrains.com/intellij-repository/releases
-    version '2019.2'
+    version '2019.3'
     //type = 'IC'
 }
 
@@ -33,7 +33,7 @@ patchPluginXml {
 }
 
 group 'org.jetbrains'
-version '1.0.14' // Plugin version
+version '1.0.15' // Plugin version
 
 allprojects {
     sourceSets {
@@ -54,7 +54,7 @@ dependencies {
     //implementation group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.5.8'
 
     //if this is not set to testImplementation the verifyPlugin task will fail since more than one plugin descriptor are in the classpath
-    testImplementation 'com.github.JetBrains:Grammar-Kit:2019.1'
+    testImplementation 'com.github.JetBrains:Grammar-Kit:2019.3'
 
     //todo: change to '1.3-groovy-2.5' once groovy >= 2.5.x can be enabled
     testImplementation(group: 'org.spockframework', name: 'spock-core', version: '1.3-groovy-2.4') {
