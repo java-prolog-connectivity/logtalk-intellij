@@ -16,7 +16,8 @@ public class Constants {
             "else" , "endif" , "dynamic" ,
             "end_category" , "end_object" , "end_protocol" , "threaded" , "eos" , "logtalk_make" , "built_in" , "halt" ,
             "flush_output" , "at_end_of_stream" , "true" , "fail" , "false" , "repeat" ,
-            "instantiation_error" , "system_error" , "nl" , "pi" , "e"));
+            "instantiation_error" , "system_error" , "nl" , "pi" , "e"
+    ));
 
     public static final Set<String> COMPOUND_NAME_KEYWORDS = new HashSet<>(asList( //newHashSet
             "encoding" , "initialization" , "op" ,
@@ -26,7 +27,7 @@ public class Constants {
             "multifile" , "private" , "protected" , "public" , "synchronized" , "use_module" ,
             "context", "parameter" , "self" , "sender" , "this" , "current_op" , "current_predicate" , "predicate_property" , "abolish" , "asserta" ,
             "assertz" , "clause" , "retract" , "retractall" , "call" , "once" , "catch" , "throw" ,
-            "type_error" , "domain_error" , "existence_error" ,
+            "uninstantiation_error", "type_error" , "domain_error" , "existence_error" ,
             "permission_error" , "representation_error" , "evaluation_error", "resource_error" , "syntax_error" ,
             "bagof" , "findall" , "forall" , "setof" ,
             "before" , "after" , "forward" , "phrase" , "expand_term" , "term_expansion" , "expand_goal" ,
@@ -37,8 +38,9 @@ public class Constants {
             "create_category" , "create_object" , "create_protocol" , "abolish_category" , "abolish_object" , "abolish_protocol" ,
             "extends_object" , "extends_protocol" , "extends_category" ,
             "implements_protocol" , "imports_category" , "instantiates_class" ,
-            "specializes_class" , "complements_object" , "abolish_events" , "current_event" , "define_events" ,
-            "threaded" , "threaded_call" , "threaded_once" , "threaded_ignore" , "threaded_exit" , "threaded_cancel" ,
+            "specializes_class" , "complements_object" , "conforms_to_protocol" ,
+            "abolish_events" , "current_event" , "define_events" ,
+            "threaded" , "threaded_call" , "threaded_once" , "threaded_ignore" , "threaded_exit" ,
             "threaded_peek" , "threaded_wait" , "threaded_notify" , "threaded_engine" , "threaded_engine_create" , "threaded_engine_destroy" ,
             "threaded_engine_self" , "threaded_engine_next" , "threaded_engine_next_reified" , "threaded_engine_yield" , "threaded_engine_post" ,
             "threaded_engine_fetch" , "logtalk_compile" , "logtalk_load" , "logtalk_make" , "logtalk_make_target_action" , "logtalk_library_path" ,
@@ -54,7 +56,7 @@ public class Constants {
             "atom_codes" , "atom_concat" , "sub_atom" , "char_code" , "number_chars" , "number_codes" , "current_prolog_flag" ,
             "halt" , "keysort" , "sort" ,
             "atan" , "atan2" , "acos" , "asin" , "sin" , "cos" , "tan" , "sign" , "abs" , "truncate" , "round" , "ceiling" , "exp" ,
-            "log" , "sqrt" , "rem" , "mod" , "div" , "float_fractional_part" , "float_integer_part" , "floor" , "min" , "max" , "xor"));
-
+            "log" , "sqrt" , "rem" , "mod" , "div" , "float_fractional_part" , "float_integer_part" , "floor" , "min" , "max" , "xor"
+    ));
 
 }
